@@ -16,7 +16,7 @@ interface Props {
 
 export const ImageVison = (props: Props) => {
 
-    const [file, setFile] = useState<any>({})
+    const [file, setFile] = useState<any>(null)
     const [wasmReady, setWasmReady] = useState(false)
     const [result, setResult] = useState<{'className': string, 'probability': number}[]>([])
     const classes = useStyles()
@@ -58,7 +58,7 @@ export const ImageVison = (props: Props) => {
 
     return (
         <div className={classes.container}>
-            <img src={file} width="200" height="200" alt="Select file" id='mimage'/>
+            {file ? <img src={file} width="300" height="400" alt="Select file" id='mimage'/>: ''}
             <br/>
             <Button
                 variant="contained"

@@ -15,11 +15,6 @@ const appMenuItems = [
     Icon: IconDashboard,
   },
   {
-    name: 'test Chart',
-    link: '/functionaltestchartjeno',
-    Icon: IconBarChart,
-  },
-  {
     name: 'Mobile Net Model',
     link: '/imagevision',
     Icon: IconBarChart,
@@ -27,7 +22,7 @@ const appMenuItems = [
   {
     name: 'TF Object Detection',
     link: '/objectdetection',
-    Icon: IconBarChart,
+    Icon: IconDashboard,
   },
  
 ]

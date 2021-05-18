@@ -20,7 +20,7 @@ interface Props {
 
 export const ObjectDetection = (props: Props) => {
 
-    const [file, setFile] = useState<any>({})
+    const [file, setFile] = useState<any>(null)
     const [wasmReady, setWasmReady] = useState(false)
     const [result, setResult] = useState<DetectedObject[]>([])
     const classes = useStyles()
