@@ -3,14 +3,8 @@ import React, { useState } from 'react'
 import { makeStyles, createStyles } from '@material-ui/core/styles'
 
 import * as mobilenet from '@tensorflow-models/mobilenet'
-import * as tf from '@tensorflow/tfjs'
 
-import '@tensorflow/tfjs-backend-wasm';
 import { ResultProbability } from './ResultProbability'
-
-// import logo from '../../logo.svg'
-
-
 
 interface Props {
     
@@ -19,12 +13,8 @@ interface Props {
 export const ImageVison = (props: Props) => {
 
     const [file, setFile] = useState<any>(null)
-    const [wasmReady, setWasmReady] = useState(true)
     const [result, setResult] = useState<{'className': string, 'probability': number}[]>([])
     const classes = useStyles()
-    
-
-    
 
    let handleCapture = async (target: any) => {
         const fileReader = new FileReader();
@@ -33,15 +23,9 @@ export const ImageVison = (props: Props) => {
         fileReader.onload = (e) => {
             setFile(e.target?.result)
         };
-        // console.log(file);
 
         setResult([]);
-        !wasmReady
-        ? tf.setBackend('wasm').then(r => {
-            setWasmReady(true);
-            classify();
-        })
-        : classify();
+         classify();
 
         
     };
@@ -50,7 +34,6 @@ export const ImageVison = (props: Props) => {
         let mimage: any = document.getElementById('mimage');
         let model = await mobilenet.load();
         let result: {'className': string, 'probability': number}[] = await model.classify(mimage);
-        // console.log(`result`, result);
 
         setResult(result);
 

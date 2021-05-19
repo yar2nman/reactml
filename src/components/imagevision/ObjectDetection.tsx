@@ -18,59 +18,42 @@ export const ObjectDetection = (props: Props) => {
     const [result, setResult] = useState<DetectedObject[]>([])
     const classes = useStyles()
 
-
-
-
-   let handleCapture = async (target: any) => {
+    let handleCapture = async (target: any) => {
         const fileReader = new FileReader();
        if(!target.files) return;
         fileReader.readAsDataURL(target.files[0]);
         fileReader.onload = (e) => {
             setFile(e.target?.result);
         };
-
         setResult([]);
         detect();
-
-
     };
 
     let detect = async () => {
         let mimage: any = document.getElementById('mimage');
         let model = await cocossd.load();
         let result: DetectedObject[] = await model.detect(mimage);
-
         setResult(result);
-
         drawRects(result);
-
-
     }
 
     let drawRects = (result: DetectedObject[]) => {
         const canvas: any = document.getElementById('canvas');
                 const context = canvas?.getContext('2d');
                 canvas.setAttribute('height', '600');
-
-
                 const img = document.getElementById('mimage') as HTMLImageElement;
                 img.setAttribute('style', '{object-fit: "cover"}')
                 img.autofocus = true;
                 context.drawImage(img, 0, 0, 500, 600);
-
                 for (let index = 0; index < result.length; index++) {
                     context.lineWidth = "3";
                     context.strokeStyle = "red";
                     context.strokeRect(result[index].bbox[0], result[index].bbox[1], result[index].bbox[2], result[index].bbox[3]);
-
-
                 }
 
             };
 
     return (
-
-
         <div className={classes.container}>
             {<img src={file || ''} width="500" height="600" alt="" id='mimage' className={classes.minmg}/>}
             <br/>
