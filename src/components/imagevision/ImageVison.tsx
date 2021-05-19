@@ -8,6 +8,8 @@ import * as tf from '@tensorflow/tfjs'
 import '@tensorflow/tfjs-backend-wasm';
 import { ResultProbability } from './ResultProbability'
 
+// import logo from '../../logo.svg'
+
 
 
 interface Props {
@@ -17,7 +19,7 @@ interface Props {
 export const ImageVison = (props: Props) => {
 
     const [file, setFile] = useState<any>(null)
-    const [wasmReady, setWasmReady] = useState(false)
+    const [wasmReady, setWasmReady] = useState(true)
     const [result, setResult] = useState<{'className': string, 'probability': number}[]>([])
     const classes = useStyles()
     
@@ -31,7 +33,7 @@ export const ImageVison = (props: Props) => {
         fileReader.onload = (e) => {
             setFile(e.target?.result)
         };
-        console.log(file);
+        // console.log(file);
 
         setResult([]);
         !wasmReady
@@ -48,7 +50,7 @@ export const ImageVison = (props: Props) => {
         let mimage: any = document.getElementById('mimage');
         let model = await mobilenet.load();
         let result: {'className': string, 'probability': number}[] = await model.classify(mimage);
-        console.log(`result`, result);
+        // console.log(`result`, result);
 
         setResult(result);
 
@@ -58,7 +60,7 @@ export const ImageVison = (props: Props) => {
 
     return (
         <div className={classes.container}>
-            {file ? <img src={file} width="300" height="400" alt="Select file" id='mimage'/>: ''}
+            {<img src={file || ''} width="300" height="400" alt="Select file" id='mimage' />}
             <br/>
             <Button
                 variant="contained"
