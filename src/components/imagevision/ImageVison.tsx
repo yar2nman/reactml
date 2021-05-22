@@ -3,8 +3,12 @@ import React, { useState } from 'react'
 import { makeStyles, createStyles } from '@material-ui/core/styles'
 
 import * as mobilenet from '@tensorflow-models/mobilenet'
+import * as tf from '@tensorflow/tfjs'
 
+import '@tensorflow/tfjs-backend-wasm';
 import { ResultProbability } from './ResultProbability'
+
+
 
 interface Props {
     
@@ -13,8 +17,12 @@ interface Props {
 export const ImageVison = (props: Props) => {
 
     const [file, setFile] = useState<any>(null)
+    const [wasmReady, setWasmReady] = useState(false)
     const [result, setResult] = useState<{'className': string, 'probability': number}[]>([])
     const classes = useStyles()
+    
+
+    
 
    let handleCapture = async (target: any) => {
         const fileReader = new FileReader();
@@ -23,9 +31,15 @@ export const ImageVison = (props: Props) => {
         fileReader.onload = (e) => {
             setFile(e.target?.result)
         };
+        console.log(file);
 
         setResult([]);
-         classify();
+        !wasmReady
+        ? tf.setBackend('wasm').then(r => {
+            setWasmReady(true);
+            classify();
+        })
+        : classify();
 
         
     };
@@ -34,6 +48,7 @@ export const ImageVison = (props: Props) => {
         let mimage: any = document.getElementById('mimage');
         let model = await mobilenet.load();
         let result: {'className': string, 'probability': number}[] = await model.classify(mimage);
+        console.log(`result`, result);
 
         setResult(result);
 
@@ -43,7 +58,7 @@ export const ImageVison = (props: Props) => {
 
     return (
         <div className={classes.container}>
-            {<img src={file || ''} width="300" height="400" alt="Select file" id='mimage' />}
+            {file ? <img src={file} width="300" height="400" alt="Select file" id='mimage'/>: ''}
             <br/>
             <Button
                 variant="contained"
