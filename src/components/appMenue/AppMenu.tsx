@@ -20,6 +20,11 @@ const appMenuItems = [
     Icon: IconBarChart,
   },
   {
+    name: 'Smart Camera',
+    link: '/smartcamera',
+    Icon: IconBarChart,
+  },
+  {
     name: 'TF Object Detection',
     link: '/objectdetection',
     Icon: IconDashboard,

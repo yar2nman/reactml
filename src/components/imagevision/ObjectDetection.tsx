@@ -67,7 +67,7 @@ export const ObjectDetection = (props: Props) => {
     let drawRects = (result: DetectedObject[]) => {
         const canvas: any = document.getElementById('canvas'); 
                 const context = canvas?.getContext('2d'); 
-                canvas.setAttribute('height', '500');
+                canvas.setAttribute('height', '600');
     
     
                 const img = document.getElementById('mimage') as HTMLImageElement;

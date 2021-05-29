@@ -23,6 +23,7 @@ import {
 import AppMenu from './components/appMenue/AppMenu'
 import { ImageVison } from './components/imagevision/ImageVison';
 import { ObjectDetection } from './components/imagevision/ObjectDetection';
+import TfImageTutorial from './components/imagevision/TfImageTutorial';
 
 const App: React.FC = () => {
   const classes = useStyles();
@@ -94,6 +95,10 @@ const App: React.FC = () => {
           <Route path="/objectdetection">
             Image Object Detection 
             <ObjectDetection />
+          </Route>
+          <Route path="/smartcamera">
+            Camera detection 
+            <TfImageTutorial />
           </Route>
         </Switch>
 
