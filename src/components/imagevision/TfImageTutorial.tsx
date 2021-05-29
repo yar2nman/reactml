@@ -29,10 +29,10 @@ function enableCam(_event: any) {
   if (!model) {
     return;
   }
-  console.log('enable cam')
+  // console.log('enable cam')
   navigator.mediaDevices.getUserMedia(constraints).then(function(stream) {
     video.current.srcObject = stream;
-    console.log(stream);
+    // console.log(stream);
     video.current.addEventListener('loadeddata', predictWebcam);
   });
 }
@@ -47,24 +47,24 @@ function disableCam(_event: any) {
     //     liveView.current.removeChild(children[i]);
     //   }
     // children.splice(0);
-    // console.log('disable cam')
+    // // console.log('disable cam')
     // video.current.srcObject = null;
     // children.splice(0);
     
   
 }
 
-  console.log('Start Loading');
+  // console.log('Start Loading');
 
   cocoSsd.load().then(function (loadedModel) {
   model = loadedModel;
   // Show demo section now model is ready to use.
   setClassname('');
   setButtonClassName('')
-  console.log('model loaded');
+  // console.log('model loaded');
 });
 
-console.log('after model loading');
+// console.log('after model loading');
 
 var children: any[] = [];
 
@@ -82,7 +82,7 @@ function predictWebcam() {
     // they have a high confidence score.
     for (let n = 0; n < predictions.length; n++) {
       // If we are over 66% sure we are sure we classified it right, draw it!
-      if (predictions[n].score > 0.66) {
+      if (predictions[n].score > 0.30) {
         const p = document.createElement('p');
         p.innerText = predictions[n].class  + ' - with ' 
             + Math.round(parseFloat(predictions[n].score) * 100) 

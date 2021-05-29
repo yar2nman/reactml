@@ -4,14 +4,18 @@ import { makeStyles, createStyles } from '@material-ui/core/styles'
 
 // import * as mobilenet from '@tensorflow-models/mobilenet'
 import * as cocossd from '@tensorflow-models/coco-ssd'
-import * as tf from '@tensorflow/tfjs'
+// import * as tf from '@tensorflow/tfjs'
 
 import '@tensorflow/tfjs-backend-wasm';
+import '@tensorflow/tfjs-backend-cpu';
+import '@tensorflow/tfjs-backend-webgl';
+
+
 // import { ResultProbability } from './ResultProbability'
 import { DetectedObject } from '@tensorflow-models/coco-ssd'
 import { ResultProbability } from './ResultProbability'
 
-import logo from '../../assets/logo.png'
+// import logo from '../../assets/logo.png'
 
 
 interface Props {
@@ -21,7 +25,7 @@ interface Props {
 export const ObjectDetection = (props: Props) => {
 
     const [file, setFile] = useState<any>(null)
-    const [wasmReady, setWasmReady] = useState(false)
+    // const [wasmReady, setWasmReady] = useState(false)
     const [result, setResult] = useState<DetectedObject[]>([])
     const classes = useStyles()
     
@@ -32,19 +36,20 @@ export const ObjectDetection = (props: Props) => {
         const fileReader = new FileReader();
        if(!target.files) return;
         fileReader.readAsDataURL(target.files[0]);
-        console.log(`object`, target.files[0])
+        // console.log(`object`, target.files[0])
         fileReader.onload = (e) => {
             setFile(e.target?.result);
         };
-        console.log(file);
+        // console.log(file);
 
         setResult([]);
-        !wasmReady
-        ? tf.setBackend('wasm').then(r => {
-            setWasmReady(true);
-            detect();
-        })
-        : detect();
+        // !wasmReady
+        // ? tf.setBackend('wasm').then(r => {
+        //     setWasmReady(true);
+        //     detect();
+        // })
+        // : detect();
+        detect();
 
         
     };
@@ -53,9 +58,9 @@ export const ObjectDetection = (props: Props) => {
         let mimage: any = document.getElementById('mimage');
         let model = await cocossd.load();
         let result: DetectedObject[] = await model.detect(mimage);
-        console.log(`result`, result);
+        // console.log(`result`, result);
 
-        console.log(`result of detection`, result)
+        // console.log(`result of detection`, result)
 
         setResult(result);
 
@@ -89,7 +94,7 @@ export const ObjectDetection = (props: Props) => {
 
  
         <div className={classes.container}>
-            <img src={file ||logo} width="500" height="600" alt="" id='mimage' className={classes.minmg}/>
+            {<img src={file || '' } width="500" height="600" alt="Select File" id='mimage' className={classes.minmg}/>}
             <br/>
             <canvas id="canvas" width="500" height="10" ></canvas>
             <br/>

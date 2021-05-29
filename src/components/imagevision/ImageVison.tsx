@@ -31,7 +31,7 @@ export const ImageVison = (props: Props) => {
         fileReader.onload = (e) => {
             setFile(e.target?.result)
         };
-        console.log(file);
+        // console.log(file);
 
         setResult([]);
         !wasmReady
@@ -48,7 +48,7 @@ export const ImageVison = (props: Props) => {
         let mimage: any = document.getElementById('mimage');
         let model = await mobilenet.load();
         let result: {'className': string, 'probability': number}[] = await model.classify(mimage);
-        console.log(`result`, result);
+        // console.log(`result`, result);
 
         setResult(result);
 
