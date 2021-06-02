@@ -124,13 +124,14 @@ function predictWebcam() {
 
 return (
   <>
-  <h1>Multiple object detection using pre trained model in TensorFlow.js</h1>
+  <h1>Video Camero Multi object detection using TFJS</h1>
 
     <p>Wait for the model to load before clicking the button to enable the webcam - at which point it will become visible to use.</p>
     
     <section id="demos" className={Classname} ref={demosSection}>
 
-      <p>Hold some objects up close to your webcam to get a real-time classification! When ready click "enable webcam" below and accept access to the webcam when the browser asks (check the top left of your window)</p>
+      <p>Hold some objects up close to your webcam to get a real-time classification! 
+        When ready click "enable webcam" below and accept access to the webcam when the browser asks (check the top left of your window)</p>
       
       <div id="liveView" className="camView" ref={liveView}>
         <button id="webcamButton" ref={enableWebcamButton} onClick={enableCam} className={ButtonClassName}>Enable Webcam</button>
