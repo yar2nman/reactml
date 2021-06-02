@@ -9,6 +9,7 @@ import * as cocossd from '@tensorflow-models/coco-ssd'
 import '@tensorflow/tfjs-backend-wasm';
 import '@tensorflow/tfjs-backend-cpu';
 import '@tensorflow/tfjs-backend-webgl';
+import './style.css';
 
 
 // import { ResultProbability } from './ResultProbability'
@@ -94,6 +95,7 @@ export const ObjectDetection = (props: Props) => {
 
  
         <div className={classes.container}>
+            <h1>Using coco-ssd to detect multi opject in a picture</h1>
             {<img src={file || '' } width="500" height="600" alt="Select File" id='mimage' className={classes.minmg}/>}
             <br/>
             <canvas id="canvas" width="500" height="10" ></canvas>

@@ -7,7 +7,7 @@ import * as tf from '@tensorflow/tfjs'
 
 import '@tensorflow/tfjs-backend-wasm';
 import { ResultProbability } from './ResultProbability'
-
+import './style.css';
 
 
 interface Props {
@@ -58,6 +58,8 @@ export const ImageVison = (props: Props) => {
 
     return (
         <div className={classes.container}>
+            <h1>Using mobilenet pre trained model to detect image context</h1>
+            <p></p>
             {file ? <img src={file} width="300" height="400" alt="Select file" id='mimage'/>: ''}
             <br/>
             <Button
