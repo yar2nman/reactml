@@ -89,15 +89,12 @@ const App: React.FC = () => {
             <ObjectDetection />
           </Route>
           <Route path="/imagevision">
-            Image Vision 
             <ImageVison />
           </Route>
           <Route path="/objectdetection">
-            Image Object Detection 
             <ObjectDetection />
           </Route>
           <Route path="/smartcamera">
-            Camera detection 
             <TfImageTutorial />
           </Route>
         </Switch>
